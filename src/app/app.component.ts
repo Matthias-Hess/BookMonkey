@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
+
+type ViewState = 'list' | 'details';
+
 
 @Component({
   selector: 'bm-root',
@@ -6,5 +10,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'BookMonkey';
 }
