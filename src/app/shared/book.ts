@@ -1,3 +1,7 @@
+export interface Thumbnail {
+  url: string;
+  title?: string;
+}
 export interface Book {
   isbn: string;
   title: string;
@@ -9,7 +13,3 @@ export interface Book {
   description?: string;
 }
 
-export interface Thumbnail {
-  url: string;
-  title?: string;
-}

@@ -38,6 +38,14 @@ export class BookStoreService {
      return this.http.post(`${this.api}/book`, book, {responseType: 'text'}).pipe(catchError(this.errorHandler));
    }
 
+   update(book: Book) {
+    return this.http.put(`${this.api}/book/${book.isbn}`, book, {responseType: 'text'}).pipe(catchError(this.errorHandler));
+   }
+
+   check(isbn: string): Observable<boolean> {
+     return this.http.get(`${this.api}/book/${isbn}/check`).pipe(catchError(this.errorHandler));
+   }
+
    getSingle(isbn: string): Observable<Book> {
     return this.http.get<BookRaw>(`${this.api}/book/${isbn}`)
     .pipe(retry(3), map(r => BookFactory.fromRaw(r), catchError(this.errorHandler)));

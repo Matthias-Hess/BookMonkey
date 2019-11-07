@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import {Book} from '../shared/book';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BookStoreService} from '../shared/book-store.service'
+import {BookStoreService} from '../shared/book-store.service';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'bm-book-details',
@@ -9,7 +11,7 @@ import {BookStoreService} from '../shared/book-store.service'
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
-  book: Book;
+  book$: Observable<Book>;
   constructor(
     private bs: BookStoreService,
     private router: Router,
@@ -18,7 +20,7 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.paramMap;
-    this.bs.getSingle(params.get('isbn')).subscribe(res => this.book = res);
+    this.book$ = this.bs.getSingle(params.get('isbn'));
   }
 
   getRating(num: number) {
@@ -26,8 +28,12 @@ export class BookDetailsComponent implements OnInit {
   }
 
   removeBook() {
-    if (confirm("Buch wirklich löschen?")){
-      this.bs.remove(this.book.isbn).subscribe(res => this.router.navigate(['../'], {relativeTo: this.route}));
+    if (confirm("Buch wirklich löschen?")) {
+      this.book$.subscribe(
+        book => this.bs.remove(book.isbn).subscribe(res => this.router.navigate(['../'], {relativeTo: this.route}))
+      );
     }
   }
 }
+
+

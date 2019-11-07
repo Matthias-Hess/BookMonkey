@@ -7,14 +7,13 @@ export class BookFactory {
   static empty(): Book {
     return  {
       isbn: '',
-      title: '',
+      title: 'TEst',
       authors:[],
       published: new Date(),
       description: '',
       rating: 0,
       subtitle: '',
       thumbnails: []
-
     }
   }
   static fromRaw(b:BookRaw):Book{

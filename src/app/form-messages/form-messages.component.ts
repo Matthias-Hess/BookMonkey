@@ -18,14 +18,14 @@ export class FormMessagesComponent implements OnInit {
     },
     isbn: {
       required: 'EIne ISBN muss angegeben werden.',
-      minlength: 'Die ISBN muss mindestens 10 Zeichen haben.',
-      maxlength: 'Die ISBN darf höchstens 13 Zeichen haben.'
+      isbnFormat: 'Die ISBN muss 10 oder 13 Zeichen haben.',
+      isbnExists: 'Die ISBN existiert bereits.'
     },
     published: {
       required: 'Ein Erscheinungsdatum ist obligatorisch.'
     },
     authors: {
-      required: 'Ein Autor ist obligatorisch.'
+      atLeastOneAuthor: 'Ein Autor ist obligatorisch.'
     }
   };
 
